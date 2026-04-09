@@ -2,8 +2,8 @@ package modulo1
 
 import (
 	"fmt"
-	"runtime"
-	"time"
+	"runtime" // para pegar as informações do sistema
+	"time" // para pegar a data e hora
 )
 
 // BoasVindas monta uma mensagem padrao de boas-vindas.
