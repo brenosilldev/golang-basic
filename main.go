@@ -1,11 +1,14 @@
 package main
 
 import (
-	"fmt"
-	m1 "github/brenosilldev/golang-basic/modulo1"
+	//"fmt"
+	//m1 "github/brenosilldev/golang-basic/modulo1"
+	// m2 "github/brenosilldev/golang-basic/modulo2"
+	m3 "github/brenosilldev/golang-basic/modulo3"
 )
 
 func main() {
 
-		fmt.Println(m1.BoasVindas("Breno"))
+	
+	m3.ControleFluxo()
 }
