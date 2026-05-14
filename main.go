@@ -1,14 +1,10 @@
 package main
 
 import (
-	//"fmt"
-	//m1 "github/brenosilldev/golang-basic/modulo1"
-	// m2 "github/brenosilldev/golang-basic/modulo2"
-	m3 "github/brenosilldev/golang-basic/modulo3"
+	// "fmt"
+	"github/brenosilldev/golang-basic/fundacao"
 )
 
 func main() {
-
-	
-	m3.ControleFluxo()
+	fundacao.MapTeste()
 }
