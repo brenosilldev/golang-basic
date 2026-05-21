@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fundacao.MapTeste()
+	fundacao.GenericsTeste()
 }
