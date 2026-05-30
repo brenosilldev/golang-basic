@@ -1,104 +1,105 @@
 package fundacao
 
+import "fmt"
+
 /*
-	Ponteiros — os símbolos & e *
+	PONTEIROS em Go
 
-	&  = "endereço de"
-	     Pega o ponteiro para uma variável.
-	     Exemplo: p := &n  →  p guarda ONDE n está na memória.
+	Toda variável ocupa um espaço na memória com um endereço único.
+	Um ponteiro é simplesmente uma variável que guarda esse endereço.
 
-	*  tem dois usos:
+	Por que usar ponteiros?
+	  - Sem ponteiro: a função recebe uma CÓPIA do valor. Alterar a cópia não muda o original.
+	  - Com ponteiro: a função recebe o ENDEREÇO. Alterar via ponteiro muda o original.
 
-	     1) No TIPO  →  significa "ponteiro para"
-	        Exemplo: *int  →  variável que aponta para um int
-	        Exemplo: *User →  variável que aponta para um User
+	Os dois símbolos:
 
-	     2) Na EXPRESSÃO  →  significa "valor apontado" (desreferenciar)
-	        Exemplo: *p  →  lê ou altera o valor que p aponta
-	        Exemplo: *p = 99  →  altera o int original, não a cópia
+	  &variavel   →  "me dá o endereço de variavel"  (cria o ponteiro)
+	  *ponteiro   →  "me dá o valor que está nesse endereço"  (desreferencia)
 
-	Resumo rápido:
-	     n   →  o valor (10)
-	     &n  →  o endereço de n (ponteiro *int)
-	     p   →  o endereço guardado
-	     *p  →  o valor que está nesse endereço
+	  *int        →  tipo que significa "ponteiro para um int"  (no tipo, não na expressão)
+
+	Mapa mental:
+	  n    = 10          (o valor em si)
+	  &n   = 0xc000...   (endereço onde n mora)
+	  p    = &n          (p guarda o endereço)
+	  *p   = 10          (lê o valor no endereço que p aponta — mesmo que n)
+	  *p = 99            (escreve 99 no endereço — altera n diretamente)
 */
 
+// Pessoa é usada nos exemplos de ponteiro para struct.
 type Pessoa struct {
 	Nome  string
 	Email string
 }
 
 func PonteirosTestes() {
+	fmt.Println("=== Ponteiros ===")
+	fmt.Println()
 
-	// explicarOperadores()
+	// --- 1. CÓPIA vs PONTEIRO ---
+	// Quando passamos n diretamente, a função recebe uma cópia.
+	// A variável original não é tocada.
+	n := 10
+	fmt.Printf("antes: n = %d\n", n)
 
-	// fmt.Println("--- ponteiros: int ---")
+	alterarCopia(n)
+	fmt.Printf("depois de alterarCopia:    n = %d  (não mudou — era só uma cópia)\n", n)
 
-	// n := 10
-	// fmt.Printf("antes: n = %d\n", n)
+	// &n envia o endereço de n. A função pode alterar o original.
+	alterarOriginal(&n)
+	fmt.Printf("depois de alterarOriginal: n = %d  (mudou — recebeu o endereço)\n", n)
 
-	// alterarCopia(n)
-	// fmt.Printf("depois de alterarCopia (cópia): n = %d\n", n)
+	fmt.Println()
 
-	// alterarOriginal(&n) // &n = passa o endereço de n para a função alterar o original
-	// fmt.Printf("depois de alterarOriginal (ponteiro): n = %d\n", n)
+	// --- 2. LENDO E ESCREVENDO PELO PONTEIRO ---
+	a := 42
+	p := &a // p é do tipo *int; guarda o endereço de a
 
-	// a := 10
-	// fmt.Println("valor de A :", a)
-	// ponteiro := &a
-	// fmt.Printf("Valor ponteiro na memoria: %p \n", ponteiro)
+	fmt.Printf("a    = %d\n", a)
+	fmt.Printf("&a   = %p  (endereço de a)\n", &a)
+	fmt.Printf("p    = %p  (p guarda esse mesmo endereço)\n", p)
+	fmt.Printf("*p   = %d  (valor no endereço que p aponta — igual a a)\n", *p)
 
-	// b := *ponteiro
-	// fmt.Println("Valor do ponteiro: ", b)
-	// c := b + 10 // Recebe o valor de ponteiro + 10
-	// fmt.Println("valor de ponteiro somado: ", c)
-	// fmt.Println("valor de ponteiro somado: ", c+10)
+	*p = 100 // escreve 100 diretamente no endereço de a
+	fmt.Printf("após *p = 100 →  a = %d  (a foi alterado via ponteiro)\n", a)
 
-	// var1 := 10
-	// var2 := 20
-	// println(soma(&var1, &var2))
-	// println(var1)
-	// println(var2)
+	fmt.Println()
 
+	// --- 3. PONTEIRO PARA STRUCT ---
+	// Acessar campos de um ponteiro para struct com "." funciona normalmente.
+	// Go faz a desreferência automática: pessoa.Nome == (*pessoa).Nome
+	pessoa := &Pessoa{Nome: "Maria", Email: "maria@email.com"}
+	fmt.Printf("pessoa.Nome  = %s\n", pessoa.Nome)
+	fmt.Printf("pessoa.Email = %s\n", pessoa.Email)
+
+	atualizarEmail(pessoa, "novo@email.com")
+	fmt.Printf("após atualizarEmail: %s\n", pessoa.Email)
+
+	fmt.Println()
+
+	// --- 4. DOIS PONTEIROS, MESMA MEMÓRIA ---
+	// x e y apontam para a mesma variável. Alterar via y também afeta x.
+	valor := 5
+	px := &valor
+	py := &valor // mesmo endereço
+
+	*px = 50
+	fmt.Printf("*py = %d *px %d  (y enxerga a mudança feita por x: mesma memória)\n", *py,*py)
 }
 
-// func soma(a, b *int) int {
+// alterarCopia recebe uma cópia de x. Alterar x aqui não tem efeito fora.
+func alterarCopia(x int) {
+	x = 99
+}
 
-// 	fmt.Println(*a)
-// 	fmt.Println(*b)
+// alterarOriginal recebe o endereço (*int). *x = 99 altera a variável original.
+func alterarOriginal(x *int) {
+	*x = 99
+}
 
-// 	*a = 20
-// 	return *a + *b
-// }
-
-// func explicarOperadores() {
-// 	fmt.Println("--- & e * na prática ---")
-
-// 	n := 10
-
-// 	// &n → ponteiro para n (tipo *int)
-// 	p := &n
-// 	fmt.Printf("n = %d (valor)\n", n)
-// 	fmt.Printf("&n → p = %p (endereço / ponteiro)\n", p)
-// 	fmt.Printf("*p = %d (valor no endereço que p guarda)\n", *p)
-
-// 	// *p altera o original, porque acessa o mesmo lugar que n
-// 	*p = 25
-// 	fmt.Printf("depois de *p = 25 → n = %d\n", n)
-
-// 	// Em parâmetros: *int no tipo = "recebo um ponteiro"
-// 	// Na chamada: &n = "envio o endereço de n"
-// 	fmt.Println()
-// 	fmt.Println("&  →  pega o endereço   (n → &n)")
-// 	fmt.Println("*  →  no tipo: ponteiro | na expressão: valor apontado")
-// 	fmt.Println()
-// }
-
-// func alterarCopia(x int) {
-// 	x = 99 // só altera a cópia local
-// }
-
-// func alterarOriginal(x *int) {
-// 	*x = 99 // *x = altera o int que x aponta (o original)
-// }
+// atualizarEmail recebe um ponteiro para Pessoa e altera o campo diretamente.
+// Se recebesse Pessoa por valor, a alteração seria descartada ao retornar.
+func atualizarEmail(p *Pessoa, novoEmail string) {
+	p.Email = novoEmail // Go desreferencia automaticamente: p.Email == (*p).Email
+}
