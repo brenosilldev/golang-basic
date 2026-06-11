@@ -1,9 +1,9 @@
 package main
 
-import "github/brenosilldev/golang-basic/pacotesimportantes"
+import "github/brenosilldev/golang-basic/fundacao"
 
 // "fmt"
 
 func main() {
-	pacotesimportantes.PacotesTest()
+	fundacao.PonteirosTestes()
 }

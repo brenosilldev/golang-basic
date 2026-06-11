@@ -85,7 +85,7 @@ func PonteirosTestes() {
 	py := &valor // mesmo endereço
 
 	*px = 50
-	fmt.Printf("*py = %d *px %d  (y enxerga a mudança feita por x: mesma memória)\n", *py,*py)
+	fmt.Printf("*py = %d *px %d  (y enxerga a mudança feita por x: mesma memória)\n", *py,*py	)
 }
 
 // alterarCopia recebe uma cópia de x. Alterar x aqui não tem efeito fora.
