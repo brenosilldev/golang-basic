@@ -1,6 +1,7 @@
 package pacotesimportantes
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 )
@@ -15,7 +16,7 @@ func PacotesTest() {
 
 	tamanho, err := f.Write([]byte("Ola mundo"))
 
-	fmt.Printf("ARquivo criado %d \n", tamanho)
+	fmt.Printf("Arquivo criado %d \n", tamanho)
 
 	f.Close()
 
@@ -26,5 +27,33 @@ func PacotesTest() {
 	}
 
 	fmt.Println(string(arq))
+
+	// Leitura de pouco em pouco abrindo o arquivo
+	arq2, err := os.Open("arquivo.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	reader := bufio.NewReader(arq2)
+	buffer := make([]byte, 3)
+
+	for {
+		n, err := reader.Read(buffer)
+
+		if err != nil {
+			break
+
+		}
+
+		fmt.Println(string(buffer[:n]))
+	}
+
+
+	//Remover 
+	err = os.Remove("arquivo.txt")
+
+	if err != nil {
+		panic(err)
+	}
 
 }
