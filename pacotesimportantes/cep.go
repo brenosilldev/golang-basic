@@ -18,7 +18,7 @@ func BuscaCepTest() {
 
 		defer req.Body.Close()
 
-		res, err :+ req.
+		res, err := req.Body.Read()
 
 		println(url)
 	}
