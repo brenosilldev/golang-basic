@@ -7,5 +7,5 @@ import (
 // "fmt"
 
 func main() {
-	pacotesimportantes.BuscaCepTest()
+	pacotesimportantes.MuxTest()
 }

@@ -29,6 +29,7 @@ func JsonTes() {
 
 	jsonPuro := []byte(`{"nmr":2,"saldo":200}`)
 	var contaX Conta
+	// json.Unmarshal(jsonPuro, &contaX) // Deserializando o json para a struct
 	err = json.Unmarshal(jsonPuro, &contaX)
 
 	if err != nil {
