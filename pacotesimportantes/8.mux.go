@@ -10,7 +10,7 @@ func MuxTest() {
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/cep",  BuscarCephandler)
+	mux.HandleFunc("/cep", BuscarCephandler)
 	fmt.Println("http://localhost:8080")
 
 	http.ListenAndServe(":8080", mux)
