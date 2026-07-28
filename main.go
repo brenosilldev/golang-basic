@@ -6,6 +6,7 @@ import (
 
 // "fmt"
 
+
 func main() {
-	pacotesimportantes.MuxTest()
+	pacotesimportantes.TemplateTest()
 }
