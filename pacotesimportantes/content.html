@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{template "header.html" .}}
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Curso</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <td>{{.Nome  | ToUpper}}</td>
+                    <td>{{.Preco}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    {{template "footer.html" .}}
+</body>
+</html>

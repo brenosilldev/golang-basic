@@ -7,7 +7,7 @@ import "fmt"
 
 	make = cria uma slice com tamanho e capacidade definidos
 
-	
+
 */
 
 func SliceTeste() {
