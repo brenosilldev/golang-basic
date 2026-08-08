@@ -6,12 +6,15 @@ import (
 	"time"
 )
 
+//Explicação do pacote context: O pacote context fornece uma maneira de passar informações entre goroutines, como deadlines, cancelamentos e valores de contexto. Ele é amplamente utilizado em aplicações web para gerenciar requisições HTTP e controlar o tempo de execução de operações assíncronas.
 //Context = Context é um pacote que permite passar informações entre goroutines, como deadlines, cancelamentos e valores de contexto. Ele é amplamente utilizado em aplicações web para gerenciar requisições HTTP e controlar o tempo de execução de operações assíncronas.
 
 func HttpContextTest() {
 
 	context := context.Background()
+
 	ctx, cancel := context.WithTimeout(context, 2*time.Second)
+
 	for i := 0; i < 5; i++ {
 		go func(i int) {
 			select {
