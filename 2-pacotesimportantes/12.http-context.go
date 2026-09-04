@@ -11,14 +11,15 @@ import (
 
 func HttpContextTest() {
 
-	context := context.Background()
+	ctx := context.Background()
 
-	ctx, cancel := context.WithTimeout(context, 2*time.Second)
+	// Criando um contexto com timeout de 2 segundos
+	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
 
-	for i := 0; i < 5; i++ {
+	for i := 1; i < 5; i++ {
 		go func(i int) {
 			select {
-			case <-time.After(1 * time.Second):
+			case <-time.After(2 * time.Second):
 				fmt.Println("Goroutine", i, "concluída com sucesso!")
 			case <-ctx.Done():
 				fmt.Println("Goroutine", i, "cancelada devido ao timeout.")
