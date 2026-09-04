@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github/brenosilldev/golang-basic/pacotesimportantes"
+	context "github/brenosilldev/golang-basic/3-context"
 )
 
 // "fmt"
 
 func main() {
-	pacotesimportantes.HttpContextTest()
+	context.ContextWithValueTest()
 }
