@@ -7,5 +7,5 @@ import (
 // "fmt"
 
 func main() {
-	context.BancoTeste()
+	context.GoORMTest()
 }
